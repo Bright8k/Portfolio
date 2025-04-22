@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+// src/pages/Contact.tsx
+import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { PageWrapper } from '../styles/GlobalStyles';
 
-const ContactForm = styled.form`
+const Form = styled(motion.form)`
   max-width: 600px;
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
-
-  label {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
+  gap: 1rem;
 
   input,
   textarea {
     padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
     font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
   }
 
   button {
@@ -28,49 +26,47 @@ const ContactForm = styled.form`
     background-color: #007acc;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #005fa3;
+    }
   }
 `;
 
 const Contact: React.FC = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-
   return (
     <PageWrapper>
-      <h2>Contact Me</h2>
-      <ContactForm onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="name">Name</label>
-        <input onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-        
-          id="name"
-          type="text"
-        />  
-        <input onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-        
-          id="email"
-          type="email"
-        />  
-        <textarea
-          id="message"
-          rows={5}
-          value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          required
-        />
-          
-          
+      <motion.h2
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Contact Me
+      </motion.h2>
 
-        <label htmlFor="email">Email</label>
-        <input id="email" type="email" required />
-
-        <label htmlFor="message">Message</label>
-        <textarea id="message" rows={5} required />
-
-        <button type="submit">Send</button>
-      </ContactForm>
+      <Form
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          alert('Message sent!');
+        }}
+      >
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea rows={5} placeholder="Your Message" required />
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          type="submit"
+        >
+          Send Message
+        </motion.button>
+      </Form>
     </PageWrapper>
   );
 };
