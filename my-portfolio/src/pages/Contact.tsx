@@ -1,83 +1,77 @@
-// src/pages/Contact.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { PageWrapper } from '../styles/GlobalStyles';
 
-const ContactForm = styled.div`
+const ContactForm = styled.form`
   max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
 
-const FormTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-`;
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
 
-const Input = styled.input`
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-`;
+  input,
+  textarea {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
 
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-`;
-
-const SubmitButton = styled.button`
-  padding: 1rem 2rem;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-
-  &:hover {
-    background-color: #0056b3;
+  button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
   }
 `;
 
-const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`);
-  };
+const Contact: React.FC = () => {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
 
   return (
-    <ContactForm>
-      <FormTitle>Contact Me</FormTitle>
-      <form onSubmit={handleSubmit}>
-        <Input
+    <PageWrapper>
+      <h2>Contact Me</h2>
+      <ContactForm onSubmit={(e) => e.preventDefault()}>
+        <label htmlFor="name">Name</label>
+        <input onChange={(e) => setForm({ ...form, name: e.target.value })}
+          required
+        
+          id="name"
           type="text"
-          placeholder="Your Name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        />
-        <Input
+        />  
+        <input onChange={(e) => setForm({ ...form, email: e.target.value })}
+          required
+        
+          id="email"
           type="email"
-          placeholder="Your Email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />  
+        <textarea
+          id="message"
+          rows={5}
+          value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })}
+          required
         />
-        <TextArea
-          placeholder="Your Message"
-          value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-        />
-        <SubmitButton type="submit">Send</SubmitButton>
-      </form>
-    </ContactForm>
+          
+          
+
+        <label htmlFor="email">Email</label>
+        <input id="email" type="email" required />
+
+        <label htmlFor="message">Message</label>
+        <textarea id="message" rows={5} required />
+
+        <button type="submit">Send</button>
+      </ContactForm>
+    </PageWrapper>
   );
 };
 

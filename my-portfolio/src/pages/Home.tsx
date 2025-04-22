@@ -1,54 +1,37 @@
-
+import React from 'react';
 import styled from 'styled-components';
+import { PageWrapper } from '../styles/GlobalStyles';
 
-const HeroSection = styled.section`
+const Hero = styled.section`
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-image: url('https://via.placeholder.com/1200x800'); /* Replace with your background image */
-  background-size: cover;
-  background-position: center;
-  color: white;
   text-align: center;
-`;
+  padding: 2rem;
 
-const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`;
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 
-const Description = styled.p`
-  font-size: 1.5rem;
-  max-width: 600px;
-  margin-bottom: 2rem;
-`;
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
 
-const Button = styled.a`
-  padding: 1rem 2rem;
-  background-color: #007BFF;
-  color: white;
-  text-transform: uppercase;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
+  p {
+    font-size: 1.2rem;
+    max-width: 600px;
   }
 `;
 
-const Home = () => {
-  return (
-    <HeroSection>
-      <Title>Welcome to My Portfolio</Title>
-      <Description>I'm a passionate developer, always eager to learn and grow. Explore my projects and skills.</Description>
-      <Button href="#projects">Explore Projects</Button>
-    </HeroSection>
-  );
-};
+const Home: React.FC = () => (
+  <PageWrapper>
+    <Hero>
+      <h1>Hi, I'm Bright 👋</h1>
+      <p>Welcome to my portfolio! I'm a developer focused on building clean and user-friendly web experiences.</p>
+    </Hero>
+  </PageWrapper>
+);
 
 export default Home;

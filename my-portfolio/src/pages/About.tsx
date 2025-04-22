@@ -1,56 +1,28 @@
-// src/pages/About.tsx
+import React from 'react';
 import styled from 'styled-components';
+import { PageWrapper } from '../styles/GlobalStyles';
 
 const AboutSection = styled.section`
-  padding: 4rem 2rem;
-  background-color: #fff;
+  padding: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    max-width: 700px;
+    line-height: 1.6;
+  }
 `;
 
-const Title = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-`;
-
-const Text = styled.p`
-  font-size: 1.2rem;
-  color: #555;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-`;
-
-const Skills = styled.ul`
-  display: flex;
-  justify-content: center;
-  margin-top: 3rem;
-  flex-wrap: wrap;
-  gap: 2rem;
-`;
-
-const Skill = styled.li`
-  background-color: #007bff;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  font-size: 1rem;
-`;
-
-const About = () => {
-  return (
+const About: React.FC = () => (
+  <PageWrapper>
     <AboutSection>
-      <Title>About Me</Title>
-      <Text>
-        I'm a full-stack developer with a passion for creating interactive web applications. I specialize in React, TypeScript, and Node.js, and I’m always exploring new technologies.
-      </Text>
-      <Skills>
-        <Skill>React</Skill>
-        <Skill>Node.js</Skill>
-        <Skill>TypeScript</Skill>
-        <Skill>CSS</Skill>
-      </Skills>
+      <h2>About Me</h2>
+      <p>I'm passionate about web development, design, and making things work beautifully across all devices. I enjoy learning new tech and building projects that help people solve real problems.</p>
     </AboutSection>
-  );
-};
+  </PageWrapper>
+);
 
 export default About;

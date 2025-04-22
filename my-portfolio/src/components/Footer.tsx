@@ -1,17 +1,19 @@
 // src/components/Footer.tsx
-
+import React from 'react';
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
-  background-color: #007BFF;
-  color: white;
-  padding: 1rem;
+  margin-top: auto;
+  padding: 1rem 2rem;
+  background-color: #f0f0f0;
   text-align: center;
+  font-size: 0.9rem;
+  color: #666;
 `;
 
-const Footer = () => (
+const Footer: React.FC = () => (
   <FooterContainer>
-    <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
+    © {new Date().getFullYear()} Bright — All Rights Reserved.
   </FooterContainer>
 );
 
