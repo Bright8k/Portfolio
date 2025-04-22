@@ -1,7 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [react()],               // Use the Vite React plugin for React support
+  build: {
+    target: 'esnext',               // Build target for modern browsers
+    outDir: 'dist',                 // Output directory for the build
+    assetsDir: 'assets'             // Directory for static assets
+  },
+  server: {
+    port: 3000                      // Define the port for development server
+  }
+});
