@@ -10,6 +10,7 @@ import project3Img from '../assets/react.svg';
 import figmaPlaceholder from '../assets/figma-placeholder.svg';
 import xmindPlaceholder from '../assets/xmind-placeholder.svg';
 import mysubhubImg from '../assets/mysubhub-og.png';
+import hopecenterImg from '../assets/hopecenter-logo.png';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -134,6 +135,17 @@ const allProjects: Project[] = [
     image: figmaPlaceholder,
     link: '/graphic-designer/Concept Development Sheet 2.pdf',
     tags: ['Concept Development', 'Visual Research', 'Adobe', 'Documentation'],
+  },
+  {
+    id: 14,
+    title: 'Hope Center for Behavior Change',
+    category: 'Development',
+    description: 'Website for a child ABA therapy and behavior change centre.',
+    fullDescription:
+      'A professional website built for Hope Center for Behavior Change, a practice specialising in Applied Behavior Analysis (ABA) therapy for children. The site communicates services, team information, and resources clearly to families seeking support, with a focus on accessibility and warm, trust-building design.',
+    image: hopecenterImg,
+    link: 'https://hopecenterforbehaviorchange.com',
+    tags: ['Web Design', 'WordPress', 'Healthcare', 'Client Work'],
   },
   {
     id: 13,
