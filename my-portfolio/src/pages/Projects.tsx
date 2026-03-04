@@ -9,6 +9,7 @@ import project2Img from '../assets/musicHubLogo 1.png';
 import project3Img from '../assets/react.svg';
 import figmaPlaceholder from '../assets/figma-placeholder.svg';
 import xmindPlaceholder from '../assets/xmind-placeholder.svg';
+import mysubhubImg from '../assets/mysubhub-og.png';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -133,6 +134,17 @@ const allProjects: Project[] = [
     image: figmaPlaceholder,
     link: '/graphic-designer/Concept Development Sheet 2.pdf',
     tags: ['Concept Development', 'Visual Research', 'Adobe', 'Documentation'],
+  },
+  {
+    id: 13,
+    title: 'MySubHub',
+    category: 'Development',
+    description: 'A web app for tracking and managing your subscription services.',
+    fullDescription:
+      'MySubHub is a subscription management web application that helps users track all their recurring services in one place. Built and deployed as a live product, it demonstrates full-stack development skills including UI design, data management, and production deployment.',
+    image: mysubhubImg,
+    link: 'https://mysubhub.io',
+    tags: ['Web App', 'Full-Stack', 'Subscriptions', 'Live Product'],
   },
   {
     id: 12,
