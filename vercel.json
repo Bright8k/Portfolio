@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "my-portfolio/dist",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "rootDirectory": "my-portfolio"
+}
