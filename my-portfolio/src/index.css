@@ -1,31 +1,32 @@
 :root {
-  /* Color System */
-  --color-bg: #FEF6F9;
-  --color-surface: #FFFFFF;
-  --color-primary: #C4778A;
-  --color-primary-light: #ECC5CF;
-  --color-primary-dark: #A85E72;
-  --color-secondary: #A891BB;
-  --color-secondary-light: #D9CEEA;
-  --color-accent: #F5E6EB;
-  --color-text: #3D2838;
-  --color-text-light: #7A6577;
-  --color-border: #EDD5DF;
+  /* Color System — Black & Gold Luxury */
+  --color-bg: #0A0807;
+  --color-surface: #100E09;
+  --color-surface-2: #171410;
+  --color-primary: #C9A84C;
+  --color-primary-light: #E0BC60;
+  --color-primary-dark: #A08535;
+  --color-secondary: #8A7A5A;
+  --color-secondary-light: #1E1B12;
+  --color-accent: #1C1812;
+  --color-text: #EDE5CE;
+  --color-text-light: #9A8E72;
+  --color-border: #2A2016;
 
   /* Typography */
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Nunito', system-ui, sans-serif;
 
   /* Shape */
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 30px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
   --radius-pill: 50px;
 
   /* Shadows */
-  --shadow-sm: 0 2px 12px rgba(196, 119, 138, 0.1);
-  --shadow-md: 0 6px 24px rgba(196, 119, 138, 0.15);
-  --shadow-lg: 0 12px 40px rgba(196, 119, 138, 0.2);
+  --shadow-sm: 0 2px 16px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.65);
+  --shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.8);
 }
 
 *,
@@ -44,6 +45,8 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   background-color: var(--color-bg);
+  background-image: radial-gradient(circle, rgba(201, 168, 76, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -73,7 +76,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-primary-light);
 }
 
 img {
@@ -88,14 +91,14 @@ button {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-accent);
+  background: var(--color-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-light);
-  border-radius: 10px;
+  background: rgba(201, 168, 76, 0.3);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary);

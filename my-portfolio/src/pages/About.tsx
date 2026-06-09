@@ -18,50 +18,53 @@ const Accent = styled.span`
 `;
 
 const Divider = styled.div`
-  width: 50px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  border-radius: 4px;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
   margin-bottom: 2rem;
 `;
 
 const Bio = styled(motion.p)`
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--color-text-light);
   max-width: 680px;
-  line-height: 1.8;
+  line-height: 1.9;
   margin-bottom: 3rem;
+  font-weight: 300;
 `;
 
 const CardsRow = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 `;
 
 const Card = styled(motion.div)`
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 1.75rem;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 
   &:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md), 0 0 0 1px rgba(201, 168, 76, 0.12);
+    border-color: rgba(201, 168, 76, 0.3);
     transform: translateY(-3px);
   }
 
   h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    margin-bottom: 1.1rem;
+    color: var(--color-text);
+    letter-spacing: 0.3px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
     span {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
   }
 `;
@@ -72,23 +75,24 @@ const SkillList = styled.ul`
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.55rem;
 `;
 
 const SkillItem = styled.li`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
+  gap: 0.6rem;
+  font-size: 0.9rem;
   color: var(--color-text-light);
-  font-weight: 500;
+  font-weight: 400;
 
   &::before {
     content: '';
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background-color: var(--color-primary-light);
+    background-color: var(--color-primary);
+    opacity: 0.65;
     flex-shrink: 0;
   }
 `;
@@ -96,36 +100,37 @@ const SkillItem = styled.li`
 const InterestPills = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.5rem;
 `;
 
 const Pill = styled.span`
   background-color: var(--color-accent);
-  color: var(--color-primary-dark);
-  padding: 0.4rem 1rem;
+  color: var(--color-primary);
+  padding: 0.35rem 1rem;
   border-radius: var(--radius-pill);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  letter-spacing: 0.3px;
 `;
 
 const CertGroup = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
 `;
 
 const CertGroupLabel = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 2.5px;
   color: var(--color-primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 `;
 
 const CertGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 0.75rem;
+  gap: 0.65rem;
 `;
 
 const CertCard = styled.a`
@@ -133,7 +138,7 @@ const CertCard = styled.a`
   align-items: center;
   gap: 0.75rem;
   padding: 0.85rem 1rem;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
@@ -143,7 +148,7 @@ const CertCard = styled.a`
   &:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
-    border-color: var(--color-primary-light);
+    border-color: rgba(201, 168, 76, 0.3);
   }
 `;
 
@@ -151,9 +156,9 @@ const CertBadge = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
   background-color: #0a66c2;
   color: #ffffff;
   font-size: 0.65rem;
@@ -163,10 +168,14 @@ const CertBadge = styled.span`
 `;
 
 const CertName = styled.span`
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-text-light);
   line-height: 1.35;
+
+  ${CertCard}:hover & {
+    color: var(--color-text);
+  }
 `;
 
 const fadeUp = {

@@ -11,7 +11,7 @@ const floatUp = keyframes`
 const Page = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - 62px);
 `;
 
 const Hero = styled.section`
@@ -21,31 +21,31 @@ const Hero = styled.section`
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 5rem 2rem 4rem;
+  padding: 6rem 2rem 5rem;
   position: relative;
   overflow: hidden;
 
   &::before {
     content: '';
     position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 400px;
-    height: 400px;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(236, 197, 207, 0.35) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.06) 0%, transparent 65%);
     pointer-events: none;
   }
 
   &::after {
     content: '';
     position: absolute;
-    bottom: -60px;
-    left: -60px;
-    width: 300px;
-    height: 300px;
+    bottom: -80px;
+    left: -80px;
+    width: 380px;
+    height: 380px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(168, 145, 187, 0.25) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.04) 0%, transparent 65%);
     pointer-events: none;
   }
 `;
@@ -53,24 +53,26 @@ const Hero = styled.section`
 const Eyebrow = styled(motion.span)`
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 3.5px;
   text-transform: uppercase;
   color: var(--color-primary);
-  background-color: var(--color-accent);
-  padding: 0.4rem 1.2rem;
-  border-radius: var(--radius-pill);
-  margin-bottom: 1.5rem;
+  background-color: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 0.4rem 1.4rem;
+  border-radius: 2px;
+  margin-bottom: 2rem;
 `;
 
 const Heading = styled(motion.h1)`
-  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: 1.25rem;
-  max-width: 700px;
-  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  max-width: 760px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 
   em {
     font-style: italic;
@@ -79,11 +81,12 @@ const Heading = styled(motion.h1)`
 `;
 
 const Subheading = styled(motion.p)`
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
   color: var(--color-text-light);
-  max-width: 560px;
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
+  max-width: 540px;
+  margin-bottom: 3rem;
+  line-height: 1.8;
+  font-weight: 300;
 `;
 
 const ButtonGroup = styled(motion.div)`
@@ -95,85 +98,95 @@ const ButtonGroup = styled(motion.div)`
 
 const PrimaryButton = styled(Link)`
   background-color: var(--color-primary);
-  color: #ffffff;
-  padding: 0.85rem 2.2rem;
-  border-radius: var(--radius-pill);
+  color: #0A0807;
+  padding: 0.9rem 2.4rem;
+  border-radius: 2px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 4px 18px rgba(196, 119, 138, 0.35);
   transition: all 0.25s ease;
 
   &:hover {
-    background-color: var(--color-primary-dark);
-    box-shadow: 0 6px 24px rgba(196, 119, 138, 0.45);
+    background-color: var(--color-primary-light);
+    color: #0A0807;
     transform: translateY(-2px);
-    color: #ffffff;
+    box-shadow: 0 8px 30px rgba(201, 168, 76, 0.3);
   }
 `;
 
 const SecondaryButton = styled(Link)`
   background-color: transparent;
   color: var(--color-primary);
-  padding: 0.85rem 2.2rem;
-  border-radius: var(--radius-pill);
+  padding: 0.9rem 2.4rem;
+  border-radius: 2px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   text-decoration: none;
-  border: 2px solid var(--color-primary-light);
+  border: 1px solid rgba(201, 168, 76, 0.4);
   transition: all 0.25s ease;
 
   &:hover {
-    background-color: var(--color-accent);
+    background-color: rgba(201, 168, 76, 0.08);
     border-color: var(--color-primary);
+    color: var(--color-primary-light);
     transform: translateY(-2px);
   }
 `;
 
 const Divider = styled.div`
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  border-radius: 4px;
-  margin: 0 auto 1.5rem;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  margin: 0 auto 2rem;
 `;
 
 const SkillsStrip = styled.section`
-  background-color: #ffffff;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  padding: 2rem 1.5rem;
+  background-color: var(--color-surface);
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  padding: 2.25rem 1.5rem;
   text-align: center;
   animation: ${floatUp} 0.8s ease both;
   animation-delay: 0.6s;
 `;
 
 const SkillsLabel = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--color-text-light);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 `;
 
 const SkillPills = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.5rem;
   justify-content: center;
 `;
 
 const Pill = styled.span`
-  background-color: var(--color-accent);
-  color: var(--color-primary-dark);
-  padding: 0.4rem 1rem;
+  background-color: transparent;
+  color: var(--color-text-light);
+  padding: 0.35rem 1rem;
   border-radius: var(--radius-pill);
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
   border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba(201, 168, 76, 0.3);
+    color: var(--color-primary);
+  }
 `;
 
 const skills = [

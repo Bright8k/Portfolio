@@ -188,6 +188,7 @@ const Header = styled.div`
 const PageTitle = styled(motion.h2)`
   font-size: clamp(2rem, 4vw, 2.8rem);
   margin-bottom: 0.5rem;
+  color: var(--color-text);
 `;
 
 const Accent = styled.span`
@@ -195,73 +196,77 @@ const Accent = styled.span`
 `;
 
 const Divider = styled.div`
-  width: 50px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  border-radius: 4px;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
   margin-bottom: 2rem;
 `;
 
 const Subtitle = styled.p`
   color: var(--color-text-light);
-  font-size: 1.05rem;
+  font-size: 1rem;
   max-width: 560px;
   margin: 0;
+  font-weight: 300;
+  line-height: 1.8;
 `;
 
 const Tabs = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
   margin-bottom: 2.5rem;
 `;
 
 const Tab = styled.button<{ $active: boolean }>`
-  padding: 0.5rem 1.2rem;
-  border-radius: var(--radius-pill);
+  padding: 0.4rem 1.1rem;
+  border-radius: 2px;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  border: 2px solid ${({ $active }) => ($active ? 'var(--color-primary)' : 'var(--color-border)')};
-  background-color: ${({ $active }) => ($active ? 'var(--color-primary)' : '#ffffff')};
-  color: ${({ $active }) => ($active ? '#ffffff' : 'var(--color-text-light)')};
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid ${({ $active }) => ($active ? 'var(--color-primary)' : 'var(--color-border)')};
+  background-color: ${({ $active }) => ($active ? 'var(--color-primary)' : 'transparent')};
+  color: ${({ $active }) => ($active ? '#0A0807' : 'var(--color-text-light)')};
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: var(--color-primary);
-    color: ${({ $active }) => ($active ? '#ffffff' : 'var(--color-primary)')};
-    background-color: ${({ $active }) => ($active ? 'var(--color-primary)' : 'var(--color-accent)')};
+    border-color: rgba(201, 168, 76, 0.5);
+    color: ${({ $active }) => ($active ? '#0A0807' : 'var(--color-primary)')};
+    background-color: ${({ $active }) => ($active ? 'var(--color-primary)' : 'rgba(201, 168, 76, 0.06)')};
   }
 `;
 
 const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 1.5rem;
+  gap: 1.25rem;
   padding-bottom: 3rem;
 `;
 
 const Card = styled(motion.div)`
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
   display: flex;
   flex-direction: column;
 
   &:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md), 0 0 0 1px rgba(201, 168, 76, 0.12);
+    border-color: rgba(201, 168, 76, 0.3);
     transform: translateY(-5px);
   }
 `;
 
 const CardImage = styled.div`
   width: 100%;
-  height: 180px;
+  height: 175px;
   background-color: var(--color-accent);
   overflow: hidden;
   display: flex;
@@ -289,54 +294,59 @@ const CardBody = styled.div`
 
 const CategoryBadge = styled.span`
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--color-primary-dark);
-  background-color: var(--color-accent);
-  border: 1px solid var(--color-primary-light);
+  color: var(--color-primary);
+  background-color: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.22);
   padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-pill);
+  border-radius: 2px;
   margin-bottom: 0.75rem;
   width: fit-content;
 `;
 
 const CardTitle = styled.h3`
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
   color: var(--color-text);
 `;
 
 const CardDesc = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--color-text-light);
-  line-height: 1.6;
+  line-height: 1.65;
   flex: 1;
   margin: 0 0 1rem;
+  font-weight: 300;
 `;
 
 const TagRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.35rem;
 `;
 
 const Tag = styled.span`
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: var(--color-secondary);
-  background-color: var(--color-secondary-light);
+  letter-spacing: 0.5px;
+  color: var(--color-text-light);
+  background-color: var(--color-accent);
   padding: 0.2rem 0.65rem;
   border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
 `;
 
 const ExpandHint = styled.span`
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--color-primary);
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   margin-top: 1rem;
   display: block;
+  opacity: 0.8;
 `;
 
 const EmptyState = styled.div`
@@ -346,8 +356,9 @@ const EmptyState = styled.div`
   color: var(--color-text-light);
 
   p {
-    font-size: 1.05rem;
+    font-size: 1rem;
     margin: 0;
+    font-weight: 300;
   }
 `;
 
@@ -356,8 +367,8 @@ const EmptyState = styled.div`
 const Overlay = styled(motion.div)`
   position: fixed;
   inset: 0;
-  background-color: rgba(61, 40, 56, 0.55);
-  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -366,19 +377,20 @@ const Overlay = styled(motion.div)`
 `;
 
 const Modal = styled(motion.div)`
-  background-color: #ffffff;
+  background-color: var(--color-surface);
+  border: 1px solid rgba(201, 168, 76, 0.2);
   border-radius: var(--radius-lg);
   max-width: 660px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(201, 168, 76, 0.06);
   position: relative;
 `;
 
 const ModalImage = styled.div`
   width: 100%;
-  height: 240px;
+  height: 230px;
   overflow: hidden;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   background-color: var(--color-accent);
@@ -398,14 +410,16 @@ const ModalBody = styled.div`
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   margin-bottom: 0.5rem;
+  color: var(--color-text);
 `;
 
 const ModalDesc = styled.p`
   color: var(--color-text-light);
-  line-height: 1.8;
-  font-size: 1rem;
+  line-height: 1.85;
+  font-size: 0.975rem;
+  font-weight: 300;
   margin-bottom: 1.5rem;
 `;
 
@@ -417,10 +431,12 @@ const ModalTagRow = styled.div`
 `;
 
 const ModalTag = styled.span`
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--color-secondary);
-  background-color: var(--color-secondary-light);
+  letter-spacing: 0.5px;
+  color: var(--color-text-light);
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-border);
   padding: 0.3rem 0.9rem;
   border-radius: var(--radius-pill);
 `;
@@ -434,19 +450,21 @@ const ModalActions = styled.div`
 const ViewButton = styled.a`
   display: inline-block;
   background-color: var(--color-primary);
-  color: #ffffff;
+  color: #0A0807;
   padding: 0.75rem 2rem;
-  border-radius: var(--radius-pill);
+  border-radius: 2px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   text-decoration: none;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: var(--color-primary-dark);
-    color: #ffffff;
+    background-color: var(--color-primary-light);
+    color: #0A0807;
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(196, 119, 138, 0.35);
+    box-shadow: 0 6px 24px rgba(201, 168, 76, 0.3);
   }
 `;
 
@@ -454,24 +472,24 @@ const CloseButton = styled.button`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 2px solid var(--color-border);
+  background-color: rgba(10, 8, 7, 0.8);
+  border: 1px solid rgba(201, 168, 76, 0.25);
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--color-text);
+  color: var(--color-text-light);
   transition: all 0.2s ease;
   z-index: 10;
   line-height: 1;
 
   &:hover {
-    background-color: var(--color-accent);
-    border-color: var(--color-primary-light);
+    background-color: rgba(201, 168, 76, 0.12);
+    border-color: var(--color-primary);
     color: var(--color-primary);
   }
 `;
@@ -526,7 +544,7 @@ const Projects: React.FC = () => {
         >
           {filtered.length === 0 ? (
             <EmptyState>
-              <p>No projects in this category yet — check back soon! ✨</p>
+              <p>No projects in this category yet — check back soon.</p>
             </EmptyState>
           ) : (
             filtered.map((project, i) => (
@@ -550,7 +568,7 @@ const Projects: React.FC = () => {
                       <Tag key={tag}>{tag}</Tag>
                     ))}
                   </TagRow>
-                  <ExpandHint>Click to view details →</ExpandHint>
+                  <ExpandHint>View details →</ExpandHint>
                 </CardBody>
               </Card>
             ))
@@ -568,9 +586,9 @@ const Projects: React.FC = () => {
             onClick={() => setSelected(null)}
           >
             <Modal
-              initial={{ opacity: 0, scale: 0.92, y: 30 }}
+              initial={{ opacity: 0, scale: 0.93, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 30 }}
+              exit={{ opacity: 0, scale: 0.93, y: 30 }}
               transition={{ type: 'spring', stiffness: 300, damping: 28 }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -591,7 +609,7 @@ const Projects: React.FC = () => {
                   {selected.link === '#hifi-unavailable' ? (
                     <ViewButton
                       as="span"
-                      style={{ opacity: 0.5, cursor: 'default', pointerEvents: 'none' }}
+                      style={{ opacity: 0.4, cursor: 'default', pointerEvents: 'none' }}
                     >
                       File Too Large for Web Hosting
                     </ViewButton>

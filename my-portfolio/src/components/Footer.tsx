@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
   padding: 2rem 2.5rem;
-  background-color: #ffffff;
-  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,12 +13,13 @@ const FooterContainer = styled.footer`
 
 const FooterLogo = styled.span`
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--color-primary);
+  letter-spacing: 1px;
 
   span {
-    color: var(--color-secondary);
+    color: var(--color-primary-light);
   }
 `;
 
@@ -28,8 +29,10 @@ const FooterLinks = styled.div`
 
   a {
     color: var(--color-text-light);
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     text-decoration: none;
     transition: color 0.2s ease;
 
@@ -41,8 +44,10 @@ const FooterLinks = styled.div`
 
 const FooterText = styled.p`
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: var(--color-text-light);
+  opacity: 0.6;
+  letter-spacing: 0.5px;
 `;
 
 const Footer: React.FC = () => (

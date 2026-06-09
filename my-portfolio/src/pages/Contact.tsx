@@ -14,6 +14,7 @@ const PageTitle = styled(motion.h2)`
   font-size: clamp(2rem, 4vw, 2.8rem);
   margin-bottom: 0.5rem;
   text-align: center;
+  color: var(--color-text);
 `;
 
 const Accent = styled.span`
@@ -21,29 +22,29 @@ const Accent = styled.span`
 `;
 
 const Divider = styled.div`
-  width: 50px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  border-radius: 4px;
-  margin: 0 auto 1.5rem;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  margin: 0 auto 1.75rem;
 `;
 
 const Subtitle = styled(motion.p)`
   color: var(--color-text-light);
-  font-size: 1.05rem;
+  font-size: 1rem;
   text-align: center;
-  max-width: 520px;
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
+  max-width: 500px;
+  margin-bottom: 2.75rem;
+  line-height: 1.8;
+  font-weight: 300;
 `;
 
 const FormCard = styled(motion.form)`
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 2.5rem 2.25rem;
   width: 100%;
-  max-width: 580px;
+  max-width: 560px;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
@@ -54,80 +55,85 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--color-text);
-  letter-spacing: 0.3px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text-light);
 `;
 
 const Input = styled.input`
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.975rem;
   font-family: var(--font-body);
   border-radius: var(--radius-sm);
-  border: 2px solid var(--color-border);
-  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-accent);
   color: var(--color-text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   outline: none;
+  font-weight: 300;
 
   &::placeholder {
     color: var(--color-text-light);
-    opacity: 0.6;
+    opacity: 0.5;
   }
 
   &:focus {
-    border-color: var(--color-primary-light);
-    box-shadow: 0 0 0 3px rgba(196, 119, 138, 0.12);
-    background-color: #ffffff;
+    border-color: rgba(201, 168, 76, 0.5);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    background-color: var(--color-surface-2);
   }
 `;
 
 const Textarea = styled.textarea`
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.975rem;
   font-family: var(--font-body);
   border-radius: var(--radius-sm);
-  border: 2px solid var(--color-border);
-  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-accent);
   color: var(--color-text);
   resize: vertical;
   min-height: 130px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   outline: none;
+  font-weight: 300;
 
   &::placeholder {
     color: var(--color-text-light);
-    opacity: 0.6;
+    opacity: 0.5;
   }
 
   &:focus {
-    border-color: var(--color-primary-light);
-    box-shadow: 0 0 0 3px rgba(196, 119, 138, 0.12);
-    background-color: #ffffff;
+    border-color: rgba(201, 168, 76, 0.5);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    background-color: var(--color-surface-2);
   }
 `;
 
 const SubmitButton = styled(motion.button)`
   padding: 0.9rem 2rem;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   background-color: var(--color-primary);
-  color: #ffffff;
+  color: #0A0807;
   border: none;
-  border-radius: var(--radius-pill);
+  border-radius: 2px;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(196, 119, 138, 0.3);
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
   margin-top: 0.25rem;
 
   &:hover {
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-primary-light);
+    box-shadow: 0 6px 24px rgba(201, 168, 76, 0.25);
   }
 
   &:disabled {
-    opacity: 0.7;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 `;
@@ -135,16 +141,16 @@ const SubmitButton = styled(motion.button)`
 const SuccessMessage = styled(motion.div)`
   text-align: center;
   padding: 2rem;
-  background-color: var(--color-accent);
-  border: 1px solid var(--color-primary-light);
+  background-color: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.25);
   border-radius: var(--radius-md);
-  max-width: 580px;
+  max-width: 560px;
   width: 100%;
 
   p {
-    color: var(--color-primary-dark);
-    font-size: 1.05rem;
-    font-weight: 600;
+    color: var(--color-primary-light);
+    font-size: 1rem;
+    font-weight: 400;
     margin: 0;
   }
 `;
@@ -184,7 +190,7 @@ const Contact: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
           >
-            <p>✨ Thank you! Your message has been sent. I'll be in touch soon.</p>
+            <p>Thank you — your message has been received. I'll be in touch soon.</p>
           </SuccessMessage>
         ) : (
           <FormCard
@@ -207,8 +213,8 @@ const Contact: React.FC = () => {
             </Label>
             <SubmitButton
               type="submit"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               Send Message
             </SubmitButton>
