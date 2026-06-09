@@ -115,21 +115,21 @@ const Textarea = styled.textarea`
 const SubmitButton = styled(motion.button)`
   padding: 0.9rem 2rem;
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  background-color: var(--color-primary);
-  color: #0A0807;
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 60%, var(--color-primary-dark) 100%);
+  color: #08090F;
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   margin-top: 0.25rem;
 
   &:hover {
-    background-color: var(--color-primary-light);
-    box-shadow: 0 6px 24px rgba(201, 168, 76, 0.25);
+    filter: brightness(1.08);
+    box-shadow: 0 8px 28px rgba(200, 171, 120, 0.25);
   }
 
   &:disabled {

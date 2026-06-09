@@ -222,20 +222,26 @@ const Tab = styled.button<{ $active: boolean }>`
   padding: 0.4rem 1.1rem;
   border-radius: 2px;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   border: 1px solid ${({ $active }) => ($active ? 'var(--color-primary)' : 'var(--color-border)')};
-  background-color: ${({ $active }) => ($active ? 'var(--color-primary)' : 'transparent')};
-  color: ${({ $active }) => ($active ? '#0A0807' : 'var(--color-text-light)')};
+  background: ${({ $active }) =>
+    $active
+      ? 'linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 60%, var(--color-primary-dark) 100%)'
+      : 'transparent'};
+  color: ${({ $active }) => ($active ? '#08090F' : 'var(--color-text-light)')};
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: rgba(201, 168, 76, 0.5);
-    color: ${({ $active }) => ($active ? '#0A0807' : 'var(--color-primary)')};
-    background-color: ${({ $active }) => ($active ? 'var(--color-primary)' : 'rgba(201, 168, 76, 0.06)')};
+    border-color: rgba(200, 171, 120, 0.5);
+    color: ${({ $active }) => ($active ? '#08090F' : 'var(--color-primary)')};
+    background: ${({ $active }) =>
+      $active
+        ? 'linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 60%, var(--color-primary-dark) 100%)'
+        : 'rgba(200, 171, 120, 0.06)'};
   }
 `;
 
@@ -249,39 +255,50 @@ const Grid = styled(motion.div)`
 const Card = styled(motion.div)`
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
 
   &:hover {
-    box-shadow: var(--shadow-md), 0 0 0 1px rgba(201, 168, 76, 0.12);
-    border-color: rgba(201, 168, 76, 0.3);
-    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border);
+    border-top-color: var(--color-primary);
+    transform: translateY(-4px);
   }
 `;
 
 const CardImage = styled.div`
   width: 100%;
-  height: 175px;
-  background-color: var(--color-accent);
+  height: 190px;
+  background: linear-gradient(160deg, var(--color-surface-2) 0%, var(--color-accent) 100%);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.35s ease;
+    transition: transform 0.4s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(14, 15, 26, 0.55) 100%);
+    pointer-events: none;
   }
 
   ${Card}:hover & img {
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
 `;
 
@@ -449,22 +466,22 @@ const ModalActions = styled.div`
 
 const ViewButton = styled.a`
   display: inline-block;
-  background-color: var(--color-primary);
-  color: #0A0807;
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 60%, var(--color-primary-dark) 100%);
+  color: #08090F;
   padding: 0.75rem 2rem;
   border-radius: 2px;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 
   &:hover {
-    background-color: var(--color-primary-light);
-    color: #0A0807;
+    color: #08090F;
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(201, 168, 76, 0.3);
+    box-shadow: 0 8px 28px rgba(200, 171, 120, 0.3);
+    filter: brightness(1.08);
   }
 `;
 
