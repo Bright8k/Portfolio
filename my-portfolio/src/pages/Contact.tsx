@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { PageWrapper } from '../styles/GlobalStyles';
 
 const Section = styled.section`
@@ -55,9 +56,9 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--color-text-light);
 `;
@@ -76,12 +77,12 @@ const Input = styled.input`
 
   &::placeholder {
     color: var(--color-text-light);
-    opacity: 0.5;
+    opacity: 0.45;
   }
 
   &:focus {
-    border-color: rgba(201, 168, 76, 0.5);
-    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    border-color: rgba(200, 171, 120, 0.5);
+    box-shadow: 0 0 0 3px rgba(200, 171, 120, 0.07);
     background-color: var(--color-surface-2);
   }
 `;
@@ -95,54 +96,52 @@ const Textarea = styled.textarea`
   background-color: var(--color-accent);
   color: var(--color-text);
   resize: vertical;
-  min-height: 130px;
+  min-height: 140px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   outline: none;
   font-weight: 300;
 
   &::placeholder {
     color: var(--color-text-light);
-    opacity: 0.5;
+    opacity: 0.45;
   }
 
   &:focus {
-    border-color: rgba(201, 168, 76, 0.5);
-    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    border-color: rgba(200, 171, 120, 0.5);
+    box-shadow: 0 0 0 3px rgba(200, 171, 120, 0.07);
     background-color: var(--color-surface-2);
   }
 `;
 
-const SubmitButton = styled(motion.button)`
+const SubmitButton = styled(motion.button)<{ $loading: boolean }>`
   padding: 0.9rem 2rem;
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 60%, var(--color-primary-dark) 100%);
-  color: #08090F;
+  background: ${({ $loading }) =>
+    $loading
+      ? 'rgba(200, 171, 120, 0.4)'
+      : 'linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 60%, var(--color-primary-dark) 100%)'};
+  color: ${({ $loading }) => ($loading ? 'rgba(8,9,15,0.6)' : '#08090F')};
   border: none;
   border-radius: 2px;
-  cursor: pointer;
-  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: ${({ $loading }) => ($loading ? 'not-allowed' : 'pointer')};
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
   margin-top: 0.25rem;
 
-  &:hover {
+  &:hover:not(:disabled) {
     filter: brightness(1.08);
     box-shadow: 0 8px 28px rgba(200, 171, 120, 0.25);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 `;
 
 const SuccessMessage = styled(motion.div)`
   text-align: center;
-  padding: 2rem;
-  background-color: rgba(201, 168, 76, 0.06);
-  border: 1px solid rgba(201, 168, 76, 0.25);
+  padding: 2.5rem 2rem;
+  background-color: rgba(200, 171, 120, 0.05);
+  border: 1px solid rgba(200, 171, 120, 0.2);
   border-radius: var(--radius-md);
   max-width: 560px;
   width: 100%;
@@ -150,17 +149,55 @@ const SuccessMessage = styled(motion.div)`
   p {
     color: var(--color-primary-light);
     font-size: 1rem;
-    font-weight: 400;
-    margin: 0;
+    font-weight: 300;
+    margin: 0 0 0.25rem;
+    line-height: 1.7;
+  }
+
+  span {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    letter-spacing: 0.3px;
   }
 `;
 
-const Contact: React.FC = () => {
-  const [submitted, setSubmitted] = useState(false);
+const ErrorBanner = styled(motion.p)`
+  font-size: 0.8rem;
+  color: #e57373;
+  background-color: rgba(229, 115, 115, 0.08);
+  border: 1px solid rgba(229, 115, 115, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  margin: 0;
+  text-align: center;
+`;
 
-  const handleSubmit = (e: React.FormEvent) => {
+const Contact: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!formRef.current) return;
+
+    setLoading(true);
+    setError(false);
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -184,42 +221,80 @@ const Contact: React.FC = () => {
           Fill out the form and I'll get back to you soon.
         </Subtitle>
 
-        {submitted ? (
-          <SuccessMessage
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
-          >
-            <p>Thank you — your message has been received. I'll be in touch soon.</p>
-          </SuccessMessage>
-        ) : (
-          <FormCard
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.2 }}
-            onSubmit={handleSubmit}
-          >
-            <Label>
-              Name
-              <Input type="text" placeholder="Your name" required />
-            </Label>
-            <Label>
-              Email
-              <Input type="email" placeholder="your@email.com" required />
-            </Label>
-            <Label>
-              Message
-              <Textarea placeholder="Tell me about your project or just say hi..." required />
-            </Label>
-            <SubmitButton
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+        <AnimatePresence mode="wait">
+          {submitted ? (
+            <SuccessMessage
+              key="success"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
             >
-              Send Message
-            </SubmitButton>
-          </FormCard>
-        )}
+              <p>Message received — thank you.</p>
+              <span>I'll be in touch soon.</span>
+            </SuccessMessage>
+          ) : (
+            <FormCard
+              key="form"
+              ref={formRef}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.2 }}
+              onSubmit={handleSubmit}
+            >
+              <Label>
+                Name
+                <Input
+                  type="text"
+                  name="from_name"
+                  placeholder="Your name"
+                  required
+                  disabled={loading}
+                />
+              </Label>
+              <Label>
+                Email
+                <Input
+                  type="email"
+                  name="reply_to"
+                  placeholder="your@email.com"
+                  required
+                  disabled={loading}
+                />
+              </Label>
+              <Label>
+                Message
+                <Textarea
+                  name="message"
+                  placeholder="Tell me about your project or just say hi..."
+                  required
+                  disabled={loading}
+                />
+              </Label>
+
+              <AnimatePresence>
+                {error && (
+                  <ErrorBanner
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    Something went wrong — please try again or email me directly at dalbright343@gmail.com
+                  </ErrorBanner>
+                )}
+              </AnimatePresence>
+
+              <SubmitButton
+                type="submit"
+                $loading={loading}
+                disabled={loading}
+                whileHover={loading ? {} : { scale: 1.02 }}
+                whileTap={loading ? {} : { scale: 0.98 }}
+              >
+                {loading ? 'Sending…' : 'Send Message'}
+              </SubmitButton>
+            </FormCard>
+          )}
+        </AnimatePresence>
       </Section>
     </PageWrapper>
   );
