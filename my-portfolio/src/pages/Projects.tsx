@@ -11,10 +11,16 @@ import figmaPlaceholder from '../assets/figma-placeholder.svg';
 import xmindPlaceholder from '../assets/xmind-placeholder.svg';
 import mysubhubImg from '../assets/mysubhub-og.png';
 import hopecenterImg from '../assets/hopecenter-logo.png';
+import bayshoreImg from '../assets/bayshore-home-buyers.png';
+import jorgeImg from '../assets/jorge-delanuez.png';
+
+// ── Constants ────────────────────────────────────────────────────────────────
+
+const GITHUB_PROFILE = 'https://github.com/Bright8k';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
-const allProjects: Project[] = [
+export const allProjects: Project[] = [
   {
     id: 1,
     title: 'Adventour App',
@@ -145,7 +151,44 @@ const allProjects: Project[] = [
       'A professional website built for Hope Center for Behavior Change, a practice specialising in Applied Behavior Analysis (ABA) therapy for children. The site communicates services, team information, and resources clearly to families seeking support, with a focus on accessibility and warm, trust-building design.',
     image: hopecenterImg,
     link: 'https://hopecenterforbehaviorchange.com',
+    status: 'Live',
     tags: ['Web Design', 'WordPress', 'Healthcare', 'Client Work'],
+  },
+  {
+    id: 15,
+    title: 'Hope Center — CEU Application Portal',
+    category: 'Development',
+    description: 'In-progress CEU application build for Hope Center for Behavior Change.',
+    fullDescription:
+      'A continuing education (CEU) application currently in development for Hope Center for Behavior Change, extending my earlier work on the practice’s main website. The portal is being built to let clinicians apply for and track continuing education credits online, replacing a manual, paper-based process.',
+    image: hopecenterImg,
+    link: 'https://github.com/Bright8k/HopeCenterCEU',
+    status: 'In Progress',
+    tags: ['Web App', 'Healthcare', 'Client Work', 'In Development'],
+  },
+  {
+    id: 16,
+    title: 'Bayshore Home Buyers',
+    category: 'Development',
+    description: 'UI redesign and interactive sold-homes map for a real estate investment company.',
+    fullDescription:
+      'A UI and design overhaul for Bayshore Home Buyers, a real estate home-buying company. I refreshed the visual design and user experience across the site and built an interactive map showcasing every home the client has purchased and sold, giving visitors a tangible, explorable view of their track record.',
+    image: bayshoreImg,
+    link: 'https://bayshorehomebuyers.com',
+    status: 'Live',
+    tags: ['Web Design', 'UI/UX Redesign', 'Interactive Map', 'Real Estate'],
+  },
+  {
+    id: 17,
+    title: 'Jorge De La Nuez',
+    category: 'Development',
+    description: 'Personal website in progress for an athlete and aspiring model.',
+    fullDescription:
+      'A personal portfolio and brand website currently in development for Jorge De La Nuez, an athlete and aspiring model. The site is being designed to showcase his athletic career, modelling portfolio, and personal brand with a clean, image-forward layout.',
+    image: jorgeImg,
+    link: 'https://jorgedelanuez.com',
+    status: 'In Progress',
+    tags: ['Web Design', 'Personal Brand', 'Portfolio Site', 'In Development'],
   },
   {
     id: 13,
@@ -178,6 +221,15 @@ const CATEGORIES: ('All' | ProjectCategory)[] = [
   'Social Media Management',
   'Graphic Designer',
 ];
+
+export const getInitials = (title: string) =>
+  title
+    .split(/\s+/)
+    .filter((word) => /[A-Za-z0-9]/.test(word))
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 
@@ -300,6 +352,44 @@ const CardImage = styled.div`
   ${Card}:hover & img {
     transform: scale(1.05);
   }
+`;
+
+const Monogram = styled.span`
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--color-primary);
+  opacity: 0.55;
+  letter-spacing: 2px;
+`;
+
+const CardMonogram = styled(Monogram)`
+  font-size: 3rem;
+`;
+
+const ModalMonogram = styled(Monogram)`
+  font-size: 3.5rem;
+`;
+
+const BadgeRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+`;
+
+const StatusBadge = styled.span`
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #dfbf92;
+  background-color: rgba(200, 171, 120, 0.1);
+  border: 1px solid rgba(200, 171, 120, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  width: fit-content;
 `;
 
 const CardBody = styled.div`
@@ -485,6 +575,29 @@ const ViewButton = styled.a`
   }
 `;
 
+const SecondaryViewButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--color-text-light);
+  padding: 0.75rem 2rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: rgba(200, 171, 120, 0.45);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+`;
+
 const CloseButton = styled.button`
   position: absolute;
   top: 1rem;
@@ -574,10 +687,17 @@ const Projects: React.FC = () => {
                 layout
               >
                 <CardImage>
-                  <img src={project.image} alt={project.title} />
+                  {project.image ? (
+                    <img src={project.image} alt={project.title} />
+                  ) : (
+                    <CardMonogram>{getInitials(project.title)}</CardMonogram>
+                  )}
                 </CardImage>
                 <CardBody>
-                  <CategoryBadge>{project.category}</CategoryBadge>
+                  <BadgeRow>
+                    <CategoryBadge>{project.category}</CategoryBadge>
+                    {project.status === 'In Progress' && <StatusBadge>In Progress</StatusBadge>}
+                  </BadgeRow>
                   <CardTitle>{project.title}</CardTitle>
                   <CardDesc>{project.description}</CardDesc>
                   <TagRow>
@@ -611,10 +731,17 @@ const Projects: React.FC = () => {
             >
               <CloseButton onClick={() => setSelected(null)} aria-label="Close">✕</CloseButton>
               <ModalImage>
-                <img src={selected.image} alt={selected.title} />
+                {selected.image ? (
+                  <img src={selected.image} alt={selected.title} />
+                ) : (
+                  <ModalMonogram>{getInitials(selected.title)}</ModalMonogram>
+                )}
               </ModalImage>
               <ModalBody>
-                <CategoryBadge>{selected.category}</CategoryBadge>
+                <BadgeRow>
+                  <CategoryBadge>{selected.category}</CategoryBadge>
+                  {selected.status === 'In Progress' && <StatusBadge>In Progress</StatusBadge>}
+                </BadgeRow>
                 <ModalTitle>{selected.title}</ModalTitle>
                 <ModalDesc>{selected.fullDescription}</ModalDesc>
                 <ModalTagRow>
@@ -637,14 +764,32 @@ const Projects: React.FC = () => {
                     >
                       Download File
                     </ViewButton>
+                  ) : selected.link.includes('github.com') ? (
+                    <ViewButton
+                      href={selected.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View on GitHub
+                    </ViewButton>
                   ) : (
                     <ViewButton
                       href={selected.link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      View Project
+                      {selected.status === 'Live' ? 'Visit Live Site' : 'View Project'}
                     </ViewButton>
+                  )}
+
+                  {!selected.link.includes('github.com') && (
+                    <SecondaryViewButton
+                      href={selected.githubLink ?? GITHUB_PROFILE}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View on GitHub
+                    </SecondaryViewButton>
                   )}
                 </ModalActions>
               </ModalBody>

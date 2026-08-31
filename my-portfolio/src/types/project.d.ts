@@ -11,6 +11,8 @@ export interface Project {
   fullDescription: string;
   image: string;
   link: string;
+  githubLink?: string;
+  status?: 'Live' | 'In Progress';
   category: ProjectCategory;
   tags: string[];
 }

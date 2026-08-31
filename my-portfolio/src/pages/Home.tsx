@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { allProjects, getInitials } from './Projects';
 
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(24px); }
@@ -204,6 +205,160 @@ const skills = [
   'Social Media', 'Node.js', 'Figma', 'Responsive Design',
 ];
 
+const featuredIds = [16, 17, 14, 13];
+const featuredProjects = featuredIds
+  .map((id) => allProjects.find((p) => p.id === id))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
+
+const FeaturedSection = styled.section`
+  padding: 5rem 2rem 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const FeaturedHeader = styled.div`
+  text-align: center;
+  margin-bottom: 3rem;
+`;
+
+const FeaturedEyebrow = styled.p`
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+`;
+
+const FeaturedTitle = styled.h2`
+  font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+  font-weight: 300;
+  color: var(--color-text);
+
+  em {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+`;
+
+const FeaturedGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+`;
+
+const FeaturedCard = styled(motion.a)`
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-top-color: var(--color-primary);
+    transform: translateY(-4px);
+  }
+`;
+
+const FeaturedImage = styled.div`
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(160deg, var(--color-surface-2) 0%, var(--color-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  span {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 2.4rem;
+    color: var(--color-primary);
+    opacity: 0.55;
+  }
+`;
+
+const FeaturedBody = styled.div`
+  padding: 1.1rem 1.25rem 1.35rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+const FeaturedBadgeRow = styled.div`
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+`;
+
+const FeaturedTag = styled.span`
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background-color: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+`;
+
+const FeaturedStatusTag = styled(FeaturedTag)`
+  color: #dfbf92;
+  background-color: rgba(200, 171, 120, 0.1);
+  border-color: rgba(200, 171, 120, 0.3);
+`;
+
+const FeaturedCardTitle = styled.h3`
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
+`;
+
+const FeaturedCardDesc = styled.p`
+  font-size: 0.825rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  font-weight: 300;
+  margin: 0;
+`;
+
+const FeaturedFooter = styled.div`
+  text-align: center;
+  margin-top: 2.75rem;
+`;
+
+const FeaturedLink = styled(Link)`
+  display: inline-block;
+  color: var(--color-text-light);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3rem;
+  transition: all 0.25s ease;
+
+  &:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+`;
+
 const Home: React.FC = () => (
   <Page>
     <Hero>
@@ -265,6 +420,51 @@ const Home: React.FC = () => (
         ))}
       </SkillPills>
     </SkillsStrip>
+
+    <FeaturedSection>
+      <FeaturedHeader>
+        <FeaturedEyebrow>Recent Work</FeaturedEyebrow>
+        <FeaturedTitle>
+          A few things I've been <em>building</em>
+        </FeaturedTitle>
+      </FeaturedHeader>
+
+      <FeaturedGrid>
+        {featuredProjects.map((project, i) => (
+          <FeaturedCard
+            key={project.id}
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.6 + i * 0.08 }}
+          >
+            <FeaturedImage>
+              {project.image ? (
+                <img src={project.image} alt={project.title} />
+              ) : (
+                <span>{getInitials(project.title)}</span>
+              )}
+            </FeaturedImage>
+            <FeaturedBody>
+              <FeaturedBadgeRow>
+                <FeaturedTag>{project.category}</FeaturedTag>
+                {project.status === 'In Progress' && (
+                  <FeaturedStatusTag>In Progress</FeaturedStatusTag>
+                )}
+              </FeaturedBadgeRow>
+              <FeaturedCardTitle>{project.title}</FeaturedCardTitle>
+              <FeaturedCardDesc>{project.description}</FeaturedCardDesc>
+            </FeaturedBody>
+          </FeaturedCard>
+        ))}
+      </FeaturedGrid>
+
+      <FeaturedFooter>
+        <FeaturedLink to="/projects">View Full Portfolio →</FeaturedLink>
+      </FeaturedFooter>
+    </FeaturedSection>
   </Page>
 );
 
